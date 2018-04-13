@@ -62,7 +62,7 @@ syntax match   i3Number  "\v[0-9]+: +[A-z0-9]+"
 syntax match   i3Comment "\v#.*$"
 syntax match   Colour    "\v#[A-Fa-f0-9]{6}"
  "
-syntax region  i3String  start=/\v"/ end=/\v"/ oneline
+syntax region  i3String  start='"' end='"' oneline
 
 syntax match   Font      "\(font pango: \|font \)\@<=.*$"
 syntax match   KeyBind   "\(bindsym \)\@<=[^ ]\+"
