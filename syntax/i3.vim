@@ -1,4 +1,4 @@
-if exists("b:current_syntax")
+if exists('b:current_syntax')
   finish
 endif
 
@@ -14,9 +14,10 @@ syntax keyword i3Repeat  for_window
 
 syntax match   ExecCmd   "\(exec --no-startup-id \+\|exec \+\)\@<=.*" contains=i3Comment
 
-syntax region  i3Params start=/\v\[/ end=/\v\]/ oneline contains=i3Param,i3ParamValue
-syntax match   i3Param      /\v[A-z]+\=/ms=s+1 contained
-syntax match   i3ParamValue /\v"[^"]+"/        contained
+" https://vi.stackexchange.com/questions/13062/exclude-start-and-end-match-from-region
+syntax region  i3Params matchgroup=i3ParamsContents start='\[' end='\]' oneline contains=i3Param,i3ParamValue
+syntax match   i3Param      /\v[A-z]+\=/ contained
+syntax match   i3ParamValue /\v"[^"]+"/ contained
 
 syntax keyword i3Keyword smart_borders new_window new_float workspace
 syntax keyword i3Keyword workspace_auto_back_and_forth workspace_layout
@@ -39,7 +40,7 @@ syntax keyword i3Keyword shmlog debuglog nop
 syntax keyword i3Function shrink grow
 
 syntax keyword i3Boolean yes no on off none enable disable toggle mode_toggle
-syntax keyword i3Boolean left right up down
+syntax keyword i3Boolean left right up down center
 syntax keyword i3Boolean next_on_output prev_on_output
 syntax keyword i3Boolean pango normal pixel top bottom
 syntax keyword i3Boolean stacking tabbed fullscreen to or
@@ -83,6 +84,7 @@ highlight default link ClientType    Boolean
 
 highlight default link i3Param       Identifier
 highlight default link i3ParamValue  String
+highlight default link i3ParamsContents Normal
 
 highlight default link ExecCmd       Default
 
@@ -90,4 +92,4 @@ highlight default link Font          String
 highlight default link Colour        String
 highlight default link KeyBind       Identifier
 
-let b:current_syntax = "i3"
+let b:current_syntax = 'i3'
